@@ -14,14 +14,13 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 app.locals.moment = require('moment');
 
-const productsRoute = require('./controllers/product');
-app.use('/api/products',productsRoute);
+/*
+const productsRoute = require('./controllers/products');
+app.use('/products',productsRoute);
+*/
 
-const accountsRoute = require('./controllers/account');
-app.use('/accounts',accountsRoute);
-
-const usersRoute = require('./controllers/user');
-app.use('/users',usersRoute);
+const usersRoute = require('./controllers/users');
+app.use('/',usersRoute);
 
 const port = 5070;
 

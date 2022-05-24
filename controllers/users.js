@@ -1,15 +1,15 @@
 const express = require('express');
 const bcryptjs = require('bcryptjs');
 const jsonwebtoken = require('jsonwebtoken');
-const User = require('../models/user')
+const User = require('../models/users')
 
 const router = express.Router();
 
-router.get('/loginPage', (request,response) => {
+router.get('/login', (request,response) => {
 
     User.findAll()
     .then(users => {
-        response.render('loginUser', {
+        response.render('login', {
             data: users
         })
     })
@@ -18,11 +18,11 @@ router.get('/loginPage', (request,response) => {
     }) 
 });
 
-router.get('/registerPage', (request,response) => {
+router.get('/register', (request,response) => {
 
     User.findAll()
     .then(users => {
-        response.render('registerUser', {
+        response.render('register', {
             data: users
         })
     })
@@ -31,7 +31,20 @@ router.get('/registerPage', (request,response) => {
     }) 
 });
 
-router.get('/homePage', (request,response) => {
+router.get('/storeHomePage', (request,response) => {
+
+    User.findAll()
+    .then(users => {
+        response.render('storeHomePage', {
+            data: users
+        })
+    })
+    .catch(err => {
+        console.log(err);
+    }) 
+});
+
+router.get('/', (request,response) => {
 
     User.findAll()
     .then(users => {
@@ -44,12 +57,12 @@ router.get('/homePage', (request,response) => {
     }) 
 });
 
-//Login
 router.post('/login', async(request,response) =>{
 
     const {email,password} = request.body;
 
     if(!email || !password){
+
         return response.status(200).json({
             message: 'Please fill inputs'
         })
@@ -74,8 +87,7 @@ router.post('/login', async(request,response) =>{
                         console.log(isMatch);
                         console.log(isMatch);
                         const token = jsonwebtoken.sign(user[0].firstName, 'EyAlon#1701');
-                        console.log("here");
-                        //response.redirect('/users/homePage');
+                        response.redirect('storeHomePage');
                         return response.status(200).json({
                             message: token
                         })
@@ -125,7 +137,7 @@ router.post('/register', async(request,response) =>{
     })
     .then(results => {
         console.log(results);
-        response.redirect('/users/homePage');
+        response.redirect('/storeHomePage');
     })
     .catch(err => {
         return response.status(500).json({
