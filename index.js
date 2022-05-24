@@ -14,10 +14,9 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 app.locals.moment = require('moment');
 
-/*
+
 const productsRoute = require('./controllers/products');
-app.use('/products',productsRoute);
-*/
+app.use('/',productsRoute);
 
 const usersRoute = require('./controllers/users');
 app.use('/',usersRoute);

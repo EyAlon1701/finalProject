@@ -31,19 +31,6 @@ router.get('/register', (request,response) => {
     }) 
 });
 
-router.get('/storeHomePage', (request,response) => {
-
-    User.findAll()
-    .then(users => {
-        response.render('storeHomePage', {
-            data: users
-        })
-    })
-    .catch(err => {
-        console.log(err);
-    }) 
-});
-
 router.get('/', (request,response) => {
 
     User.findAll()
@@ -68,9 +55,8 @@ router.post('/login', async(request,response) =>{
         })
     }
     else{
-        console.log(email)
         User.findAll({where: {email: email}})
-        .then(user => {
+        .then(async user => {
             if(user[0]==null)
             {   
                 return response.status(500).json({
@@ -83,11 +69,8 @@ router.post('/login', async(request,response) =>{
                 .then(isMatch => {
                     console.log(isMatch);
                     if(isMatch){
-                        console.log(user);
-                        console.log(isMatch);
-                        console.log(isMatch);
                         const token = jsonwebtoken.sign(user[0].firstName, 'EyAlon#1701');
-                        response.redirect('storeHomePage');
+                        //  response.redirect('storeHomePage');
                         return response.status(200).json({
                             message: token
                         })
@@ -101,7 +84,7 @@ router.post('/login', async(request,response) =>{
                 })
                 .catch(err => {
                     return response.status(500).json({
-                        message: 'ERROR'
+                        message: err.message
                     });
                 })
             }

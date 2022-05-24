@@ -13,6 +13,27 @@
 <body>
     <h1>Welcome to POP store</h1>
     
-   
-    </body>
+    <div class="container">
+        <%if(data.length > 0){%>
+            <table class="table">
+                <thead>
+                    <td>Product</td>
+                    <td>Price</td>
+                    <td>Photo</td>
+                    <td>Category</td>
+                <thead>
+                <tbody>
+                    <%for(let product of data){%>
+                        <tr>
+                            <td><%=product.productName%></td>
+                            <td><%=product.productPrice%>$</td>
+                            <td><img src="<%=product.productPhoto%>" style='width: 150px'></td>
+                            <td><%=product.productCategory%></td>
+                        </tr>
+                    <%}%>
+                </tbody>
+            </table>
+        <%}%>
+    </div>  
+</body>
 </html>

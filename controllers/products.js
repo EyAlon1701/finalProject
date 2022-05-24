@@ -4,6 +4,18 @@ const Product = require('../models/products')
 
 const router = express.Router();
 
+router.get('/storeHomePage', (request,response) => {
+
+    Product.findAll()
+    .then(products => {
+        response.render('storeHomePage', {
+            data: products
+        })
+    })
+    .catch(err => {
+        console.log(err);
+    }) 
+});
 
 //CRUD - CREATE
 router.post('/createProduct', (request,response) => {
@@ -16,11 +28,11 @@ router.post('/createProduct', (request,response) => {
     })
     .then(results => {
         console.log(results);
-        response.redirect('/accounts');
+        response.redirect('/storeHomePage');
     })
     .catch(err => {
         console.log(err);
-        response.redirect('/accounts');
+        response.redirect('/storeHomePage');
     })  
 })
 
