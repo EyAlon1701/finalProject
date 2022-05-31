@@ -12,7 +12,7 @@ const Product = database.define('product', {
     productName: Sequelize.STRING,
     productPrice: Sequelize.DOUBLE,
     productPhoto: Sequelize.STRING,
-    productCategory: Sequelize.STRING
+    productCategoryId: Sequelize.INTEGER
 })
 
 module.exports = Product;

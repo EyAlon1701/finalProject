@@ -7,13 +7,13 @@ module.exports = async(request, response,next) => {
     if(bearerHeader)
     {
         const token = bearerHeader.split(' ')[1];
-        const tokenVerify = await jwt.verify(token, 'EyAlon#1701', (error,goodtoken) =>{
+        await jwt.verify(token, 'EyAlon#1701', (error,goodtoken) =>{
             if(error)
             {
                 console.log("error: " + error)
                 return response.sendStatus(403);
             }
-            User.findAll({where: {email: tokenVerify}})
+            User.findAll({where: {email: goodtoken}})
             .then(users => {
                 if(users[0])
                 {

@@ -2,6 +2,7 @@ const { response } = require('express');
 const express = require('express');
 const Category = require('../models/categories')
 const auth = require("../auth")
+const Product = require('../models/products')
 
 const router = express.Router();
 

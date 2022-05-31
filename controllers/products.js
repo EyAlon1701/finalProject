@@ -20,12 +20,12 @@ router.get('/storeHomePage',auth, (request,response) => {
 
 //CRUD - CREATE
 router.post('/createProduct', auth,(request,response) => {
-    const {productName,productPrice,productPhoto,productCategory}= request.body;
+    const {productName,productPrice,productPhoto,productCategoryId}= request.body;
     Product.create({
         productName: productName,
         productPrice: productPrice,
         productPhoto: productPhoto,
-        productCategory: productCategory
+        productCategoryId: productCategoryId
     })
     .then(results => {
         console.log(results);
@@ -68,10 +68,10 @@ router.get('/getProduct/:ProductId', auth, (request,response) => {
     })
 })
 
-//CRUD - READ ONE/MANY BY VALUE(NAME)
-router.get('/getProductsByValue/:search',auth, (request,response) => {
-    const search = request.params.search;
-    Product.findAll({where: {productName: search}})
+//CRUD - READ ONE/MANY BY categoryId
+router.get('/getProductsByCategoryId/:categoryId',auth, (request,response) => {
+    const categoryId = request.params.categoryId;
+    Product.findAll({where: {productCategoryId: categoryId}})
     .then(Products => {
         return response.status(200).json({
             message: Products
@@ -89,11 +89,11 @@ router.put('/updateProduct/:ProductId',auth, (request,response) => {
     const ProductId = request.params.ProductId;
     Product.findByPk(ProductId)
     .then(Product => {
-        const {productName,productPrice,productPhoto,productCategory}= request.body;
+        const {productName,productPrice,productPhoto,productCategoryId}= request.body;
         Product.productName = productName
         Product.productPrice = productPrice 
         Product.productPhoto = productPhoto
-        Product.productCategory = productCategory 
+        Product.productCategoryId = productCategoryId 
         return Product.save()  
     })
     .then(Product_updated => {
