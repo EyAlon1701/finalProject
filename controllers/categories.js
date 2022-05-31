@@ -15,11 +15,11 @@ router.post('/createCategory', auth,(request,response) => {
     })
     .then(results => {
         console.log(results);
-        response.redirect('/accounts');
+        response.redirect('/storeHomePage');
     })
     .catch(err => {
         console.log(err);
-        response.redirect('/accounts');
+        response.redirect('/storeHomePage');
     })  
 })
 
@@ -97,9 +97,24 @@ router.delete('/deleteCategory/:categoryId', auth,(request,response) => {
     const categoryId = request.params.categoryId;
     Category.findByPk(categoryId)
     .then(category => {
-        return category.destroy();
+        category.destroy();
     })
     .then(category_removed => {
+        Product.findAll({where: {productCategoryId: categoryId}})
+        .then(products => {
+            for(i =0;i<products.lenght();i++)
+            {
+                products[i].destroy();
+            }
+            return response.status(200).json({
+                message: "all delete"
+            })
+        })
+        .catch(err => {
+            return response.status(500).json({
+                message: err
+            })
+        })
         return response.status(200).json({
             message: category_removed
         });
