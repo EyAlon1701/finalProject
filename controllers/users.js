@@ -69,7 +69,7 @@ router.post('/login', async(request,response) =>{
                 .then(isMatch => {
                     console.log(isMatch);
                     if(isMatch){
-                        const token = jsonwebtoken.sign(user[0].firstName, 'EyAlon#1701');
+                        const token = jsonwebtoken.sign(user[0].email, 'EyAlon#1701');
                         //  response.redirect('storeHomePage');
                         return response.status(200).json({
                             message: token
@@ -120,7 +120,10 @@ router.post('/register', async(request,response) =>{
     })
     .then(results => {
         console.log(results);
-        response.redirect('/storeHomePage');
+        return response.status(200).json({
+            message: "succeed! now login"
+        })
+       // response.redirect('/storeHomePage');
     })
     .catch(err => {
         return response.status(500).json({

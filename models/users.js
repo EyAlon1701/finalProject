@@ -2,7 +2,7 @@ const Sequelize = require('sequelize');
 const database = require('../utilis/database');
 
 const User = database.define('user', {
-    id: {
+    userId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         primaryKey: true,

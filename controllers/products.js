@@ -1,10 +1,11 @@
 const { response } = require('express');
 const express = require('express');
 const Product = require('../models/products')
+const auth = require("../auth")
 
 const router = express.Router();
 
-router.get('/storeHomePage', (request,response) => {
+router.get('/storeHomePage',auth, (request,response) => {
 
     Product.findAll()
     .then(products => {
@@ -18,7 +19,7 @@ router.get('/storeHomePage', (request,response) => {
 });
 
 //CRUD - CREATE
-router.post('/createProduct', (request,response) => {
+router.post('/createProduct', auth,(request,response) => {
     const {productName,productPrice,productPhoto,productCategory}= request.body;
     Product.create({
         productName: productName,
@@ -37,7 +38,7 @@ router.post('/createProduct', (request,response) => {
 })
 
 //CTUD - READ ALL
-router.get('/getAllProducts', (request,response) => {
+router.get('/getAllProducts',auth, (request,response) => {
     Product.findAll()
     .then(Products => {
         return response.status(200).json({
@@ -52,7 +53,7 @@ router.get('/getAllProducts', (request,response) => {
 })
 
 //CRUD - READ ONE BY PK
-router.get('/getProduct/:ProductId', (request,response) => {
+router.get('/getProduct/:ProductId', auth, (request,response) => {
     const ProductId = request.params.ProductId;
     Product.findByPk(ProductId)
     .then(Product => {
@@ -67,8 +68,24 @@ router.get('/getProduct/:ProductId', (request,response) => {
     })
 })
 
+//CRUD - READ ONE/MANY BY VALUE(NAME)
+router.get('/getProductsByValue/:search',auth, (request,response) => {
+    const search = request.params.search;
+    Product.findAll({where: {productName: search}})
+    .then(Products => {
+        return response.status(200).json({
+            message: Products
+        })
+    })
+    .catch(err => {
+        return response.status(500).json({
+            message: err
+        })
+    })
+})
+
 //CTUD - UPDATE
-router.put('/updateProduct/:ProductId', (request,response) => {
+router.put('/updateProduct/:ProductId',auth, (request,response) => {
     const ProductId = request.params.ProductId;
     Product.findByPk(ProductId)
     .then(Product => {
@@ -92,7 +109,7 @@ router.put('/updateProduct/:ProductId', (request,response) => {
 })
 
 //CRUD - DELETE ONE BY PK
-router.delete('/deleteProduct/:ProductId', (request,response) => {
+router.delete('/deleteProduct/:ProductId',auth, (request,response) => {
     const ProductId = request.params.ProductId;
     Product.findByPk(ProductId)
     .then(Product => {
@@ -107,24 +124,6 @@ router.delete('/deleteProduct/:ProductId', (request,response) => {
         return response.status(500).json({
             message: err
         });
-    })
-})
-
-
-
-//CRUD - READ ONE/MANY BY VALUE(NAME)
-router.get('/getProductsByValue/:search', (request,response) => {
-    const search = request.params.search;
-    Product.findAll({where: {productName: search}})
-    .then(Products => {
-        return response.status(200).json({
-            message: Products
-        })
-    })
-    .catch(err => {
-        return response.status(500).json({
-            message: err
-        })
     })
 })
 

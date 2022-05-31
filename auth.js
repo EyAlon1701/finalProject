@@ -1,25 +1,38 @@
-import { auto } from 'async';
-import { response } from 'express'
-import jwt from 'jsonwebtoken'
-const User = require('../models/users')
+const jwt = require('jsonwebtoken');
+const User = require('./models/users')
 
-
-const auth = async(request, response,next) => {
-
+module.exports = async(request, response,next) => {
     const bearerHeader = request.headers['authorization'];
-    const bearer = bearerHeader.split(' ');
-    const token = bearer[1];
 
-    const tokenVerify = await jwt.verify(token, 'EyAlon#1701')
-    const account = await User.find(x => x.email == tokenVerify.email)
-
-    if(account){
-        request.account = account;
-        next();
-    } else {
+    if(bearerHeader)
+    {
+        const token = bearerHeader.split(' ')[1];
+        const tokenVerify = await jwt.verify(token, 'EyAlon#1701', (error,goodtoken) =>{
+            if(error)
+            {
+                console.log("error: " + error)
+                return response.sendStatus(403);
+            }
+            User.findAll({where: {email: tokenVerify}})
+            .then(users => {
+                if(users[0])
+                {
+                    request.user = users[0];
+                    next();
+                }
+                else{
+                    return response.sendStatus(403);
+                }
+            })
+            .catch(err => {
+                return response.status(403).json({
+                    message: err
+                })
+            })
+        })
+    }
+    else
+    {
         return response.sendStatus(403);
     }
-    console.log(tokenVerify);
 }
-
-export default auth;
