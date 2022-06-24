@@ -117,7 +117,7 @@ router.post('/verify', async(request,response) =>{
                 user[0].isApproved = true;
                 user[0].save();
                 return response.status(200).json({
-                    message: 'The account is now verified!'
+                    message: 'The user is now verified!'
                 })
             }
             else 
@@ -151,8 +151,8 @@ router.post('/updatePassword', async (request, response) => {
         })
     }
 
-    Account.findAll({where: {email: email}})
-    .then(user => {
+    User.findAll({where: {email: email}})
+    .then(async user => {
         if(user[0] == null)
         {
             return response.status(200).json({
