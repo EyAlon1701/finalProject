@@ -45,7 +45,7 @@ router.post('/login', async(request,response) =>{
                     else
                     {
                         return response.status(500).json({
-                            message: 'Password not match'
+                            message: 'Password does not match'
                         })
                     }
                 })
@@ -76,27 +76,44 @@ router.post('/register', async(request,response) =>{
             message: 'Please fill inputs'
         });
     }
-
-    const hash_password = await bcryptjs.hash(password,10);
-    User.create({
-        firstName: firstName,
-        lastName: lastName,
-        email: email,
-        password: hash_password,
-        passcode: Math.floor(1000 + Math.random() * 9000),
-        mobile: mobile
-    })
-    .then(results => {
-        console.log(results);
-        return response.status(200).json({
-            message: "succeed! now login"
-        })
+    User.findAll({where: {email: email}})
+    .then(async user => {
+        if(user[0]!=null)
+        {   
+            return response.status(500).json({
+                message: 'User already exists'
+            })  
+        }
+        else
+        {
+            const hash_password = await bcryptjs.hash(password,10);
+            User.create({
+                firstName: firstName,
+                lastName: lastName,
+                email: email,
+                password: hash_password,
+                passcode: Math.floor(1000 + Math.random() * 9000),
+                mobile: mobile
+            })
+            .then(results => {
+                console.log(results);
+                return response.status(200).json({
+                    message: "succeed! now login"
+                })
+            })
+            .catch(err => {
+                return response.status(200).json({
+                    message: 'Error creating user'
+                });
+            })
+        }
     })
     .catch(err => {
         return response.status(500).json({
-            message: 'ERROR'
+            message: err
         });
     })
+
 })
 
 router.post('/verify', async(request,response) =>{
@@ -130,7 +147,7 @@ router.post('/verify', async(request,response) =>{
             else 
             {
                 return response.status(200).json({
-                    message: 'The code is incorrect'
+                    message: 'The passcode is incorrect'
                 })
             }
         }
@@ -171,7 +188,7 @@ router.post('/updatePassword', async (request, response) => {
             user[0].password = hash_password;
             user[0].save();
             return response.status(200).json({
-                message:  'Password updates successfully'
+                message:  'Password updated successfully'
             })
         }
     }) 
