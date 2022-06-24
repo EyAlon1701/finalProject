@@ -188,7 +188,7 @@ router.post('/updatePassword', async (request, response) => {
             user[0].password = hash_password;
             user[0].save();
             return response.status(200).json({
-                message:  'Password updated successfully'
+                message: 'Password updated successfully'
             })
         }
     }) 
