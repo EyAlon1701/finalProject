@@ -1,0 +1,664 @@
+{
+	"info": {
+		"_postman_id": "9451d710-50f7-44fa-b4d9-a4433fcc3329",
+		"name": "finalProject",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19921448"
+	},
+	"item": [
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\" : \"Eyalon\",\r\n    \"lastName\" : \"Hershler\",\r\n    \"email\" : \"eyalon@gmail.com\",\r\n    \"password\" : \"12345678\",\r\n    \"mobile\" : \"0521234567\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5070/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5070",
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\" : \"eyalon@gmail.com\",\r\n    \"password\": \"12345678\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5070/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5070",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "verify",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\" : \"eyalon1@gmail.com\",\r\n    \"passcode\": \"7910\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5070/verify",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5070",
+							"path": [
+								"verify"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "forgetPassword",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\" : \"eyalon@gmail.com\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5070/forgetPassword",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5070",
+							"path": [
+								"forgetPassword"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updatePassword",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\" : \"eyalon@gmail.com\",\r\n    \"password\": \"12345678\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5070/updatePassword",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5070",
+							"path": [
+								"updatePassword"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "products",
+			"item": [
+				{
+					"name": "createProduct",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.ZXlhbG9uQGdtYWlsLmNvbQ.8t1mVCyGdxBnom2b_ZXBVvTWAceFsZ0qPJwvEbc-CTo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"productName\": \"DOCTOR STRANGE - DOCTOR STRANGE IN THE MULTIVERSE OF MADNESS\",\r\n    \"productPrice\": 12.00,\r\n    \"productPhoto\": \"https://images.stockx.com/images/Funko-Pop-Marvel-Studios-Doctor-Strange-and-The-Multiverse-of-Madness-Doctor-Strange-Figure-1000.jpg?fit=fill&bg=FFFFFF&w=700&h=500&fm=webp&auto=compress&q=90&dpr=2&trim=color&updated_at=1646366072\",\r\n    \"productCategoryId\": 4\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5070/createProduct",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5070",
+							"path": [
+								"createProduct"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllProducts",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.ZXlhbG9uQGdtYWlsLmNvbQ.8t1mVCyGdxBnom2b_ZXBVvTWAceFsZ0qPJwvEbc-CTo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:5070/getAllProducts",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5070",
+							"path": [
+								"getAllProducts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getProduct",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.ZXlhbG9uQGdtYWlsLmNvbQ.8t1mVCyGdxBnom2b_ZXBVvTWAceFsZ0qPJwvEbc-CTo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:5070/getProduct/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5070",
+							"path": [
+								"getProduct",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getProductsByCategoryId",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.ZXlhbG9uQGdtYWlsLmNvbQ.8t1mVCyGdxBnom2b_ZXBVvTWAceFsZ0qPJwvEbc-CTo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:5070/getProductsByCategoryId/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5070",
+							"path": [
+								"getProductsByCategoryId",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateProduct",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.ZXlhbG9uQGdtYWlsLmNvbQ.8t1mVCyGdxBnom2b_ZXBVvTWAceFsZ0qPJwvEbc-CTo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"productName\": \"DOCTOR STRANGE - DOCTOR STRANGE IN THE MULTIVERSE OF MADNESS\",\r\n    \"productPrice\": 15.00,\r\n    \"productPhoto\": \"https://images.stockx.com/images/Funko-Pop-Marvel-Studios-Doctor-Strange-and-The-Multiverse-of-Madness-Doctor-Strange-Figure-1000.jpg?fit=fill&bg=FFFFFF&w=700&h=500&fm=webp&auto=compress&q=90&dpr=2&trim=color&updated_at=1646366072\",\r\n    \"productCategoryId\": 3\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5070/updateProduct/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5070",
+							"path": [
+								"updateProduct",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteProduct",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.ZXlhbG9uQGdtYWlsLmNvbQ.8t1mVCyGdxBnom2b_ZXBVvTWAceFsZ0qPJwvEbc-CTo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:5070/deleteProduct/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5070",
+							"path": [
+								"deleteProduct",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "categories",
+			"item": [
+				{
+					"name": "createCategory",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.ZXlhbG9uQGdtYWlsLmNvbQ.8t1mVCyGdxBnom2b_ZXBVvTWAceFsZ0qPJwvEbc-CTo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"categoryName\": \"Marvel\",\r\n    \"categoryDescription\": \"Mar....vel\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5070/createCategory",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5070",
+							"path": [
+								"createCategory"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAllCategories",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.ZXlhbG9uQGdtYWlsLmNvbQ.8t1mVCyGdxBnom2b_ZXBVvTWAceFsZ0qPJwvEbc-CTo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:5070/getAllCategories",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5070",
+							"path": [
+								"getAllCategories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getCategory",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.ZXlhbG9uQGdtYWlsLmNvbQ.8t1mVCyGdxBnom2b_ZXBVvTWAceFsZ0qPJwvEbc-CTo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:5070/getCategory/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5070",
+							"path": [
+								"getCategory",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getCategoriesByValue",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.ZXlhbG9uQGdtYWlsLmNvbQ.8t1mVCyGdxBnom2b_ZXBVvTWAceFsZ0qPJwvEbc-CTo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:5070/getCategoriesByValue/marvel",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5070",
+							"path": [
+								"getCategoriesByValue",
+								"marvel"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateCategory",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.ZXlhbG9uQGdtYWlsLmNvbQ.8t1mVCyGdxBnom2b_ZXBVvTWAceFsZ0qPJwvEbc-CTo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"categoryName\": \"Marvel\",\r\n    \"categoryDescription\": \"Mar....vel\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5070/updateCategory/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5070",
+							"path": [
+								"updateCategory",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteCategory",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.ZXlhbG9uQGdtYWlsLmNvbQ.8t1mVCyGdxBnom2b_ZXBVvTWAceFsZ0qPJwvEbc-CTo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:5070/deleteCategory/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5070",
+							"path": [
+								"deleteCategory",
+								"4"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
