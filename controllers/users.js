@@ -160,8 +160,34 @@ router.post('/verify', async(request,response) =>{
 })
 
 router.post('/forgetPassword', async (request, response) => {
+    const {email} = request.body;
 
-  
+    if(!email)
+    {
+        return response.status(200).json({
+            message: 'Please fill inputs'
+        })
+    }
+    User.findAll({where: {email: email}})
+    .then(user => {
+        if(user[0]==null)
+        {   
+            return response.status(500).json({
+                message: 'User Not found'
+            })  
+        }
+        else
+        {
+            return response.status(200).json({
+                message: "The passcode is: " + user[0].passcode
+            })  
+        }
+    })
+    .catch(err => {
+        return response.status(500).json({
+            message: err
+        })
+    })
 })
 
 router.post('/updatePassword', async (request, response) => {
