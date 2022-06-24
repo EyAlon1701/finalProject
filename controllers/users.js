@@ -28,12 +28,19 @@ router.post('/login', async(request,response) =>{
             {
                 bcryptjs.compare(password,user[0].password)
                 .then(isMatch => {
-                    console.log(isMatch);
-                    if(isMatch){
-                        const token = jsonwebtoken.sign(user[0].email, 'EyAlon#1701');
-                        return response.status(200).json({
-                            message: token
-                        })
+                    if(isMatch)
+                    {
+                        if(user[0].isApproved == true) {
+                            const token = jsonwebtoken.sign(user[0].email, 'EyAlon#1701');
+                            return response.status(200).json({
+                                message: token
+                            })
+                        }
+                        else {
+                            return response.status(200).json({
+                                message: "The user not approved!"
+                            })
+                        }      
                     }
                     else
                     {
